@@ -5,3 +5,43 @@
 "SELECT CHEF.CODE_CHEF,(sum(tblMP.vente)) as MP,(sum(tblPHP.vente)) as PHP,(sum(tblPHC.vente)) as PHC" & vbCrLf & _
                           "FROM (((REGION INNER JOIN (CHEF INNER JOIN CHEF_REGION ON CHEF.CODE_CHEF = CHEF_REGION.CODE_CHEF) ON REGION.CODE_REGION = CHEF_REGION.CODE_REGION) INNER JOIN tblPHP ON REGION.CODE_REGION = tblPHP.CODE_REGION) INNER JOIN tblMP ON REGION.CODE_REGION = tblMP.CODE_REGION) INNER JOIN tblPHC ON REGION.CODE_REGION = tblPHC.CODE_REGION " & vbCrLf & _
                           "GROUP BY CHEF.CODE_CHEF"
+
+"SELECT STATJ2.DESIGNATION,STATJ2.MOIS,STATJ2.DATE,STATJ2.QTE,STATJ2.CA,STATJ2.PYS,STATJ2.FAMILLE_COM,STATJ2.FAMILLE,STATJ2.CODE_GENE,STATJ2.CHEF" & vbCrLf & _
+                        "FROM STATJ2" & vbCrLf & _
+                        "Where  STATJ2.FAMILLE_COM = 'QUICK_ARDEN' AND STATJ2.PYS = 'FRANCE' AND STATJ2.MOIS < 12 "
+
+"SELECT STATJ1.DESIGNATION,STATJ1.MOIS,STATJ1.DATE,STATJ1.QTE,STATJ1.CA,STATJ1.PYS,STATJ1.FAMILLE_COM,STATJ1.FAMILLE,STATJ1.CODE_GENE,STATJ1.CHEF" & vbCrLf & _
+                        "FROM STATJ1" & vbCrLf & _
+                        "Where  STATJ1.Designation like 'QA*' AND STATJ1.PYS = 'FRANCE' AND STATJ1.MOIS < 12 "
+
+
+
+StatJ QA UA CW
+
+QA
+"SELECT First(LEFT(STATJ1.ARTICLE,2)) as ATTACHE,First(STATJ1.PYS) as PAYS,(sum(STATJ1.QTE)) as SUM,STATJ1.CHEF" & vbCrLf & _
+                        "FROM STATJ1" & vbCrLf & _
+                        "Where  STATJ1.ARTICLE like 'QA*' AND STATJ1.PYS = 'FRANCE' AND STATJ1.MOIS < 12 AND STATJ1.FAMILLE_COM ='QUICK_ARDEN' " & vbCrLf & _
+                        " Group by STATJ1.CHEF"
+UA
+"SELECT First(LEFT(STATJ1.ARTICLE,2)) as ATTACHE,First(STATJ1.PYS) as PAYS,(sum(STATJ1.QTE)) as SUM,STATJ1.CHEF" & vbCrLf & _
+                        "FROM STATJ1" & vbCrLf & _
+                        "Where  STATJ1.ARTICLE like 'UA*' AND STATJ1.PYS = 'FRANCE' AND STATJ1.MOIS < 12 AND STATJ1.FAMILLE_COM ='QUICK_ARDEN' " & vbCrLf & _
+                        " Group by STATJ1.CHEF"
+AECW
+"SELECT First(LEFT(STATJ1.ARTICLE,2)) as ATTACHE,First(STATJ1.PYS) as PAYS,(sum(STATJ1.QTE)) as SUM,STATJ1.CHEF" & vbCrLf & _
+                        "FROM STATJ1" & vbCrLf & _
+                        "Where  STATJ1.ARTICLE like 'AE*' AND STATJ1.PYS = 'FRANCE' AND STATJ1.MOIS < 12 AND STATJ1.FAMILLE_COM ='QUICK_ARDEN' " & vbCrLf & _
+                        " Group by STATJ1.CHEF"
+
+StatJ CA
+
+"SELECT First(LEFT(STATJ1.ARTICLE,2)) as ATTACHE,First(STATJ1.PYS) as PAYS,(CLng(sum(STATJ1.CA))) as CA,STATJ1.CHEF" & vbCrLf & _
+                        "FROM STATJ1" & vbCrLf & _
+                        "Where  STATJ1.PYS = 'FRANCE' AND STATJ1.MOIS < 12  and STATJ1.CHEF IN('BCA','CCA','DNA','CVE','GDO','GTH','SGO','VVA','CBAR','PJU','SIEGE') " & vbCrLf & _
+                        " Group by STATJ1.CHEF"
+
+"SELECT First(LEFT(STATJ2.ARTICLE,2)) as ATTACHE,First(STATJ2.PYS) as PAYS,(CLng(sum(STATJ2.CA))) as CA,STATJ2.CHEF" & vbCrLf & _
+                        "FROM STATJ2" & vbCrLf & _
+                        "Where  STATJ2.PYS = 'FRANCE' AND STATJ2.MOIS < 12  and STATJ2.CHEF like 'BCA' " & vbCrLf & _
+                        " Group by STATJ2.CHEF"
